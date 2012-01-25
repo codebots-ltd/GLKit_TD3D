@@ -1,0 +1,19 @@
+<particleEmitterConfig>
+	<texture>defaultEmitter.png</texture>
+    <emissionRate>1</emissionRate>
+	<sourcePosition x="0" y="0" z="0"></sourcePosition>
+	<sourcePositionVariance x="0" y="0" z="0"></sourcePositionVariance>
+	<speed value="5"></speed>
+	<speedVariance value="1.00"></speedVariance>
+	<particleLifeSpan value="3.0"></particleLifeSpan>
+	<particleLifespanVariance value="0.25"></particleLifespanVariance>
+	<angle x="0" y="0"></angle>
+	<angleVariance x="25" y="0"></angleVariance>
+	<gravity x="0" y="0" z="0"></gravity>
+	<maxParticles value="100"></maxParticles>
+	<startParticleSize value="1"></startParticleSize>
+	<startParticleSizeVariance value="3"></startParticleSizeVariance>
+	<finishParticleSize value="0"></finishParticleSize>
+	<FinishParticleSizeVariance value="0"></FinishParticleSizeVariance>
+	<duration value="-1"></duration>
+</particleEmitterConfig>

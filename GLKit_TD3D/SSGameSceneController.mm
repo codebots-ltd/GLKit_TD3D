@@ -2,8 +2,26 @@
 //  SSViewController.m
 //  GLKit_TD3D
 //
-//  Created by Michael Daley on 12/09/2011.
-//  Copyright (c) 2011 71Squared. All rights reserved.
+// Copyright (c) 2011 71Squared
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 //
 
 #import "SSGameSceneController.h"
@@ -11,42 +29,82 @@
 #import "SSModel.h"
 #import "EnemyFighter.h"
 #import "EnemyBomber.h"
-#import "Light.h"
-#import "btBulletCollisionCommon.h"
+#import "Camera.h"
+#import "SkyBox.h"
 #import "GLDebugDrawer.h"
+#import "ParticleEmitter.h"
+#import "PlasmaShot.h"
 
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+#pragma mark - Defines
 
 #pragma mark - Private Interface
 
 @interface SSGameSceneController () {
 
-    GLKMatrix3 normalMatrix;
-    NSMutableArray *ships;
-    GLKSkyboxEffect *skyBoxEffect;
-    GLKTextureInfo *skyboxTexture;
-    Light *light;
-    btCollisionWorld *collisionWorld;
+    // Rendering base effects
+    GLKBaseEffect       *effect;
+    GLKBaseEffect       *bulletDebugEffect;
+    
+    // Objects
+    NSMutableArray      *objects;
+    SkyBox              *skybox;
+    ParticleEmitter     *sparksEmitter;
+    NSMutableArray      *plasmaParticles;
+    NSMutableArray      *explosionParticles;
+    
+    // Physics
+    GLDebugDrawer       debugDrawer;            // Responsible for rendering Bullet debug geometry
 
     // Motion Manager
-    BOOL coreMotionEnabled;
-    CMMotionManager *motionManager;
-    CMAttitude *attitude;
+    BOOL                coreMotionEnabled;      // Is CoreMotion enabled
+    CMMotionManager     *motionManager;
+    CMAttitude          *referenceAttitude;     // Holds the initial attitude of the device
     
-    GLDebugDrawer debugDrawer;
+    // General ivars
+    BOOL                enemyInSights;          // YES if the guns sights are over a ship
+    GLKVector3          bulletHitPosition;      // Holds the position of a bullet strike on a ship
+    CGAffineTransform   HUDTextRotate;          // Holds a rotation to rotate the UIKit HUD labels
+    BOOL                firing;                 // Tracks if the player is touching the screen firing
+    BOOL                bulletDebug;            // Tracks if bullet debug info should be rendered
+    uint                firingTouchHash;        // Tracks the touch that caused the player to fire
     
+    uint                enemyShield;            // Holds the shiled of the currently target enemy
+    
+    BOOL                thrusterOn;             // YES if the thruster button is being pressed
+    float               speed;                  // The current speed of the player
+
+    GLKMatrix4          deviceMatrix;           // Holds the gyros roation matrix for the device
 }
+
+#pragma mark - Private Properties
 
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 @property (strong, nonatomic) GLKBaseEffect *bulletDebugEffect;
 
-// Private methods
+#pragma mark - Private Methods
+
+// Sets up OpenGL for this view such as the GLKBaseEffects to be used during rendering
 - (void)setupGL;
+
+// Removes the GLKBaseEffects that have been created
 - (void)tearDownGL;
+
+// Sets up the objects and HUD for the game. This includes creating instances of the models to be used
 - (void)initScene;
+
+// Creates the physics collision world that is used to manage the collisions within the game
 - (void)initPhysics;
+
+// Sets up CoreMotion so we can track the movement of the device using the Gyro
 - (void)initCoreMotion;
+
+// Checks to see if the gun sight is over an enemy ship. This is done by casting a ray from the middle of the screen at the cameras
+// location in the direction the camera is looking and seeing it it collides with anything
+- (BOOL)checkGunSight;
+
+// Renders the Gun Sight
+- (void)renderHUD;
 
 @end
 
@@ -54,40 +112,65 @@
 
 @implementation SSGameSceneController
 
+#pragma mark - Properties
+
 @synthesize context = _context;
 @synthesize effect = _effect;
 @synthesize bulletDebugEffect;
-
+@synthesize particleEmitterEffect;
 @synthesize sceneModelMatrix;
 @synthesize assetManager;
+@synthesize currentBoundTexture;
+@synthesize currentBoundVOA;
+@synthesize camera;
+@synthesize collisionWorld;
 
-- (void)viewDidLoad
-{
+#pragma  mark - View Methods
+
+- (void)dealloc {
+    
+    if (collisionWorld)
+        free(collisionWorld);
+    
+}
+
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
+    // We are using GLKit which uses OpenGL ES 2.0 so we need a GLES2 context
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
     
     GLKView *view = (GLKView *)self.view;
+
+    // Set up the views context, depth buffer format, scale factor and preferred frames per second
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     view.contentScaleFactor = 1;
-    self.preferredFramesPerSecond = 60;
+
+    // How many times per second do we want to render a screen and update the game logic
+    self.preferredFramesPerSecond = 60; 
+    
+    [view setMultipleTouchEnabled:YES];
     
     // Set up the asset manager
     assetManager = [[AssetManager alloc] init];
     
+    // Initialize the game scene such as OpenGL, CoreMotion, Physics and the scene objects themselves
     [self setupGL];
     [self initCoreMotion];
     [self initPhysics];
     [self initScene];
+    
 }
 
-- (void)viewDidUnload
-{    
-    [super viewDidUnload];
+- (void)viewDidUnload {
+    
+    shieldText = nil;
+    scoreText = nil;
     
     [self tearDownGL];
     
@@ -95,117 +178,492 @@
         [EAGLContext setCurrentContext:nil];
     }
 	self.context = nil;
+    whiteSight = nil;
+    redSight = nil;
+    enemyShieldText = nil;
+    touchImage = nil;
+    thrustButton = nil;
+    speedLabel = nil;
+    [super viewDidUnload];
+
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-//    } else {
-//        return YES;
-//    }
-    return NO;
-
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    // We keep the GLKView orientation in portait as this coincides with the orientation of the gyro info we get from CoreMotion
+    // This means that if UIKit controls are placed within the GLKView they need to be rotated manually to the landscape orientation
+    return ((interfaceOrientation == UIInterfaceOrientationPortrait));
+    
 }
 
 #pragma mark - Setup/tear down OpenGL
 
-- (void)setupGL
-{
+- (void)setupGL {
+    
     NSLog(@"Setting up OpenGL...");
     
     [EAGLContext setCurrentContext:self.context];
     
-    // Calculate the projection matrix and apply it to the effect
-    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 500.0f);
+    // Create our camera object. By default the cameras location will be {0, 0, 0} with a facing vector of {0, 0, -1}
+    camera = [[Camera alloc] initWithGameSceneController:self];
 
     // Setup the skybox
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"skybox_texture" ofType:@"png"];
-    NSError *outError;
-    skyboxTexture = [GLKTextureLoader cubeMapWithContentsOfFile:path options:nil error:&outError];
-    NSAssert1(!outError, @"Error occured loading skybox texture: %@", outError.localizedDescription);
-
-    skyBoxEffect = [[GLKSkyboxEffect alloc] init];
-    skyBoxEffect.textureCubeMap.name = skyboxTexture.name;
-    skyBoxEffect.center = GLKVector3Make(0, 0, 0);
-    skyBoxEffect.xSize = 500;
-    skyBoxEffect.ySize = 500;
-    skyBoxEffect.zSize = 500;
-    skyBoxEffect.transform.projectionMatrix = projectionMatrix;
+    skybox = [[SkyBox alloc] initWithProjectionMatrix:camera.projectionMatrix width:camera.farDistance height:camera.farDistance depth:camera.farDistance];
     
     // Setup the base effect shader for core rendering
     self.effect = [[GLKBaseEffect alloc] init];
     self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.position = GLKVector4Make(0, 0, 0, 1);
-    self.effect.light0.ambientColor = GLKVector4Make(1, 1, 1, 1);
-    self.effect.material.shininess = 20.0;
-    self.effect.material.specularColor = GLKVector4Make(1, 1, 1, 1);
+    self.effect.light0.ambientColor = GLKVector4Make(1.0, 1.0, 1.0, 1.0f);
+    self.effect.light0.diffuseColor = GLKVector4Make(0.6f, 0.6f, 1.0f, 1.0f);
+    self.effect.light0.position = GLKVector4Make(0, 0, 1, 0);
+    self.effect.material.shininess = 25.0f;
+    self.effect.material.specularColor = GLKVector4Make(0.6f, 0.6f, 1.0f, 1.0f);
     self.effect.lightingType = GLKLightingTypePerPixel;
     self.effect.texture2d0.envMode = GLKTextureEnvModeModulate;
     self.effect.useConstantColor = GL_FALSE;
-    self.effect.transform.projectionMatrix = projectionMatrix;
+    self.effect.transform.projectionMatrix = camera.projectionMatrix;
+
+    // Setup the shader to be used for rendering particles
+    self.particleEmitterEffect = [[GLKBaseEffect alloc] init];
+    self.particleEmitterEffect.texture2d0.envMode = GLKTextureEnvModeModulate;
+    self.particleEmitterEffect.useConstantColor = GL_FALSE; 
+    self.particleEmitterEffect.transform.projectionMatrix = camera.projectionMatrix;
     
-    // Set up a shader to use when rendering the buller debug info
+    // Init bullet debug drawing using it's own base effect
     self.bulletDebugEffect = [[GLKBaseEffect alloc] init];
     self.bulletDebugEffect.useConstantColor = GL_TRUE;
     self.bulletDebugEffect.constantColor = GLKVector4Make(0, 1, 0, 1);
-    self.bulletDebugEffect.transform.projectionMatrix = projectionMatrix;
+    self.bulletDebugEffect.transform.projectionMatrix = camera.projectionMatrix;
+
+    // Set the colour to be used when clearing the color frame buffer
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
-    // Static OpenGL states
-    glClearColor(0, 0, 0, 1.0f);
+    // This should be on by default, but just to be sure :o)
     glEnable(GL_DEPTH_TEST);
+    
+    // We want to make sure that we are writing to the depth buffer as well. Again this is on by default
+    glDepthMask(GL_TRUE);
+    
+    // Define how blending is to be done. This is a standard setup for the blend function that will honour transparency 
+    // of textures as long as blending is switched of
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    // Switch of blending as this should only be on when we need it to help with performance.
+    glDisable(GL_BLEND);
+    
+    // We have no need to render the reverse side of the faces (triangles) we are rendering, so we switch that off
     glEnable(GL_CULL_FACE);
     
 }
 
-- (void)tearDownGL
-{
+- (void)tearDownGL {
+
+    NSLog(@"Tearing down OpenGL");
     [EAGLContext setCurrentContext:self.context];
-    
-//    glDeleteBuffers(1, &vertexBuffer);
-//    glDeleteVertexArraysOES(1, &vertexArray);
     
     self.effect = nil;
     self.bulletDebugEffect = nil;
-    skyBoxEffect = nil;
+    self.particleEmitterEffect = nil;
     
 }
+
+#pragma mark - GLKView and GLKViewController delegate methods
+
+- (void)update {
+    
+    // Check with the bullet collision world for any collisions. This initial check will identify AABB collisions between objects. This
+    // is then followed up by a more detailed OBB collision check
+    int numManifolds = collisionWorld->getDispatcher()->getNumManifolds();
+    for (int i=0; i < numManifolds; i++)
+    {
+        // Get the manifold information and extract the two objects that have collided
+        btPersistentManifold *contactManifold =  collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
+        btCollisionObject *colObjA = static_cast<btCollisionObject*>(contactManifold->getBody0());
+        btCollisionObject *colObjB = static_cast<btCollisionObject*>(contactManifold->getBody1());
+        
+        // Having detected a collision between the objects OBB, now check to see if there are any actual contacts
+        // between the two objects. Only if there are and the distance is <= 0 should a collision be reported.
+        uint contact = 0;
+        while (contact < contactManifold->getNumContacts()) {
+            btManifoldPoint& pt = contactManifold->getContactPoint(contact);
+            if (pt.getDistance()<=0.0f)
+            {
+                // Pass each object the object with which it has collided
+                SSAbstractObject *objectA = (__bridge SSAbstractObject*)colObjA->getUserPointer();
+                SSAbstractObject *objectB = (__bridge SSAbstractObject*)colObjB->getUserPointer();
+                [objectA collidedWithObject:objectB];
+                [objectB collidedWithObject:objectA];
+            }
+            contact++;
+        }
+    }
+
+    // Reset the scenes matrix
+    sceneModelMatrix = GLKMatrix4Identity;
+    
+    // Grab the motion managers current rotation matrix. We multiply the current attitude with the reference attitude to get the current
+    // rotation based on the difference between the two
+    CMAttitude *attitude = motionManager.deviceMotion.attitude;
+    if (referenceAttitude != nil)
+        [attitude multiplyByInverseOfAttitude:referenceAttitude];
+    CMRotationMatrix rm = attitude.rotationMatrix;
+    
+    // Create a GLKMatrix4 that we will apply to our models so that they are rendered in relation to where the device is pointing
+    deviceMatrix = GLKMatrix4Make(rm.m11, rm.m21, rm.m31, 0, 
+                                  rm.m12, rm.m22, rm.m32, 0,
+                                  rm.m13, rm.m23, rm.m33, 0,
+                                  0,      0,      0,      1);
+
+    // Apply rotation to the X and Y axis so that movement of the device is oriented with the OpenGL world coordinates e.g -z is into the screen and +y is up
+    deviceMatrix = GLKMatrix4RotateX(deviceMatrix, GLKMathDegreesToRadians(90));
+    deviceMatrix = GLKMatrix4RotateY(deviceMatrix, GLKMathDegreesToRadians(-90));
+    
+    // Multiply our scene and device matrices together. This will cause all objects to then be rendered 
+    // based on the rotation of the device giving the appearance that we are looking around inside our
+    // 3D world. This is only done if core motion is enabled so we can test on the simulator (without device movement)
+    if (coreMotionEnabled) {
+        sceneModelMatrix = GLKMatrix4Multiply(sceneModelMatrix, deviceMatrix);
+    }
+    
+    // While the thrust button is pressed increase speed to the max. If the button is not pressed then reduce
+    // speed
+    if (thrusterOn) {
+        if (speed + 0.001f <= 0.5f)
+            speed += 0.001f;
+    } else {
+        if (speed - 0.001f >= 0)
+            speed -= 0.001f;
+    }
+
+    // Adjust the cameras location
+    camera.position = GLKVector3Add(camera.position, GLKVector3MultiplyScalar(GLKVector3Negate(camera.facingVector), speed));
+    
+    // Move to the cameras location
+    sceneModelMatrix = GLKMatrix4Translate(sceneModelMatrix, camera.position.x, camera.position.y, camera.position.z);
+
+    // Update the camera based on the rotation of the device which is now held in the sceneModelMatrix
+    [camera updateWithModelMatrix:deviceMatrix];
+
+    // Check to see if the gun sight is lined up
+    enemyInSights = [self checkGunSight];
+    
+    // Having calculated the SceneModelMatrix based on the gyro, set the base effects model matrix and set the lights position.
+    // This ensures that the lights position is calculated correctly for all rendering from this point onwards on the scenes objects
+    self.effect.transform.modelviewMatrix = sceneModelMatrix;
+    self.effect.light0.position = GLKVector4Make(0, 0, 1, 0);
+    
+    // Update the logic of each object in the scene. They all inherit from SSAbstractObject so we can treat each object as an 
+    // SSAbstractObject
+    for (SSAbstractObject *object in objects) {
+        [object updateWithDelta:self.timeSinceLastUpdate];
+    }
+
+    // Update each plasma shot that has been fired
+    for (SSAbstractObject *plasmaShot in plasmaParticles) {
+        [plasmaShot updateWithDelta:self.timeSinceLastUpdate];
+    }
+    
+    // Update each explosion
+    for (ParticleEmitter *explosion in explosionParticles) {
+        [explosion updateWithDelta:self.timeSinceLastUpdate cameraFacingVector:camera.facingVector];
+    }
+
+    // If an enemy ship is in the players sights and they are firing, update the particle emitter used to generate sparks
+    // on the ship being hit
+    if (enemyInSights && firing) {
+        sparksEmitter.active = YES;
+        sparksEmitter.sourcePosition = bulletHitPosition;
+    } else {
+        sparksEmitter.active = NO;
+    }
+
+    // Updating the sparks emitter is outside the sights and firing check above as we need to make sure that particles 
+    // still alive from when the emitter was active need to continue to update to the end of their lives, so the particles
+    // don't just stop or vanish when the player stops firing or looses their target
+    [sparksEmitter updateWithDelta:self.timeSinceLastUpdate cameraFacingVector:camera.facingVector];
+    
+    // Perform collision detection within the collision world. The results will be used in the next frame to update
+    // any objects that have collided
+    collisionWorld->performDiscreteCollisionDetection();
+
+}
+
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    // Transform and render the skybox. We pass in the deviceMatrix as we are only interested in rotation for the skybox
+    // as it's always located at the cameras position
+    [skybox renderWithModelMatrix:deviceMatrix gameScene:self];
+    
+    // Render ships
+    [objects makeObjectsPerformSelector:@selector(render)];
+    
+    // If bullet debug is on then render the debug output
+    if (bulletDebug) {
+        glPushGroupMarkerEXT(0, "Bullet Debug");
+        bulletDebugEffect.transform.modelviewMatrix = sceneModelMatrix;
+        collisionWorld->debugDrawWorld();
+        glPopGroupMarkerEXT();
+    }
+    
+    // Render sparks, plasma rounds and explostions
+    [sparksEmitter render];
+    [plasmaParticles makeObjectsPerformSelector:@selector(render)];
+    [explosionParticles makeObjectsPerformSelector:@selector(render)];
+
+    // Render the HUD last so it is ontop of everything else already rendered
+    [self renderHUD];
+    
+    // We don't need the current contents of the depth buffer in the next frame as we are clearing it
+    // so discarding it can provide a small but simple performance boost
+    const GLenum discards[]  = {GL_DEPTH_ATTACHMENT};
+    glDiscardFramebufferEXT(GL_FRAMEBUFFER, 1, discards);
+    
+}
+
+- (void)renderHUD {
+
+    // Set up the color and thickness of the gun sight based on an enemy being in the sights or not
+    if (enemyInSights) {
+        redSight.hidden = NO;
+        whiteSight.hidden = YES;
+        enemyShieldText.hidden = NO;
+        [enemyShieldText setText:[NSString stringWithFormat:@"%i", enemyShield]];
+    } else {
+        redSight.hidden = YES;
+        whiteSight.hidden = NO;
+        enemyShieldText.hidden = YES;
+    }
+    
+    // Update the ships speed
+    [speedLabel setText:[NSString stringWithFormat:@"Speed: %1.2f", speed]];
+
+}
+
+-(BOOL)checkGunSight {
+    
+    // Check to see if the gun sight is lined up with an enemy by casting a ray from the cameras position in the
+    // direction the camera is facing.
+    btVector3 rayFrom = btVector3(camera.position.x, camera.position.y, camera.position.z);
+    btVector3 rayTo = btVector3(camera.position.x + camera.facingVector.x * camera.farDistance,
+                                camera.position.y + camera.facingVector.y * camera.farDistance,
+                                camera.position.z + camera.facingVector.z * camera.farDistance);
+    
+    // Set up the raycallback along with the collision filter mask and group
+    btCollisionWorld::ClosestRayResultCallback rayCallBack(rayFrom, rayTo);
+
+    // We only want the ray to collide with ships
+    rayCallBack.m_collisionFilterGroup = COL_LAZER;
+    rayCallBack.m_collisionFilterMask = COL_SHIP | COL_PLASMA;
+    
+    // Perform the raytest
+    collisionWorld->rayTest(rayFrom, rayTo, rayCallBack);
+    
+    if (rayCallBack.hasHit()) {
+        SSAbstractObject *object = (__bridge SSAbstractObject*)rayCallBack.m_collisionObject->getUserPointer();
+        enemyShield = object.shield;
+
+        // If the player is firing then inform the object that the ray has hit that it's been fired upon
+        if (firing)
+            [object collidedWithCollisionGroup:rayCallBack.m_collisionFilterGroup];
+
+        // Set the position of the hit so that the sparks emitter can be rendered in the right place
+        bulletHitPosition = GLKVector3Make(rayCallBack.m_hitPointWorld.getX(), rayCallBack.m_hitPointWorld.getY(), rayCallBack.m_hitPointWorld.getZ());
+        return YES;
+    }
+    
+    // If there is no ship hit by the ray then return NO
+    return NO;
+}
+
+- (void)fireWeaponFrom:(GLKVector3)from to:(GLKVector3)to {
+    // Check through the array of plasma shells to find one that is not active and set it up to
+    for (SSAbstractObject *plasmaShot in plasmaParticles) {
+        if (plasmaShot.state == AbstractObjectDead) {
+            plasmaShot.state = AbstractObjectAlive;
+            plasmaShot.position = from;
+            plasmaShot.direction = GLKVector3Normalize(GLKVector3Subtract(to, from));
+            [plasmaShot addToCollisionWorld:collisionWorld];
+            break;
+        }
+    }
+}
+
+- (void)explosionAt:(GLKVector3)aVector {
+    
+    // Loop through the explosion emitters and use the first one that is idle as the explosion effect
+    for (ParticleEmitter *explosion in explosionParticles) {
+        if (!explosion.active && explosion.particleCount == 0) {
+            explosion.sourcePosition = aVector;
+            explosion.active = YES;
+            break;
+        }
+    }
+}
+
+#pragma mark 
+#pragma mark Touch handing
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    // If the player taps the screen with more than one finger then switch the bullet debug rendering
+    // on or off as necessary
+    if ([touches count] > 1) {
+		bulletDebug = (!bulletDebug) ? YES : NO;
+	}
+	
+    // Check to see if the touch just ended was the one used to fire and if so, stop firing
+    for (UITouch *touch in touches) 
+    {
+        if (firing && firingTouchHash == [touch hash]) 
+        {
+            firing = NO;
+            touchImage.hidden = YES;
+        }
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    for (UITouch *touch in touches) 
+    {
+        if (firing && firingTouchHash == [touch hash]) 
+        {
+            // Get the location of the touch in the view
+            CGPoint touchPoint = [touch locationInView:self.view];
+
+            // We want to render this image centered on the players finger so subtract half the images
+            // width and height from the coordinates at which to position the image
+            touchPoint.x -= 64;
+            touchPoint.y -= 64;
+
+            // Get the frame of the image and adjust it's origin based on the touch location
+            CGRect frame = touchImage.frame;
+            frame.origin = touchPoint;
+            touchImage.frame = frame;
+        }
+    }        
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    // Grab the first touch and use that to start firing
+    for (UITouch *touch in touches) 
+    {
+        if (!firing) {
+            firingTouchHash = [touch hash];
+            firing = YES;
+
+            // Show the touch image
+            touchImage.hidden = NO;
+            
+            // Get the location of the touch in the view
+            CGPoint touchPoint = [touch locationInView:self.view];
+            
+            // We want to render this image centered on the players finger so subtract half the images
+            // width and height from the coordinates at which to position the image
+            touchPoint.x -= 64;
+            touchPoint.y -= 64;
+            
+            // Get the frame of the image and adjust it's origin based on the touch location
+            CGRect frame = touchImage.frame;
+            frame.origin = touchPoint;
+            touchImage.frame = frame;
+            break;
+        }
+    }    
+}
+
+- (IBAction)thrusterFiring:(id)sender {
+    thrusterOn = YES;
+}
+
+- (IBAction)thrusterStopped:(id)sender {
+    thrusterOn = NO;
+}
+
+#pragma mark - Init Core Motion, Physics world and Game Scene
 
 #pragma mark - Initialize Scene
 
 - (void)initScene {
     
     NSLog(@"Initializing Scene...");
-    // Init the dictionary that will hold our ship instances and create some
-    ships = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 2; i+=2) {
-        EnemyFighter *shipModel = [[EnemyFighter alloc] initWithScene:self];
-        shipModel.shader = self.effect;
-        shipModel.position = GLKVector3Make(-3, 0, -10);
-        [shipModel addToCollisionWorld:collisionWorld];
-        [ships addObject:shipModel];
-        EnemyBomber *bomberModel = [[EnemyBomber alloc] initWithScene:self];
-        bomberModel.shader = self.effect;
-        bomberModel.position = GLKVector3Make(3, 0, -15);
-        [bomberModel addToCollisionWorld:collisionWorld];
-        [ships addObject:bomberModel];
+    
+    // Add the camera collision object to the collision world as this is what the enemy ships will be shooting at
+    [camera addToCollisionWorld:collisionWorld];
+    
+    // Set up the HUD using UILabels. As we are not rotating the GLKView to landscape (as the Gyro data would be off) we need
+    // to ratate the labels manually 90 degrees
+    HUDTextRotate = CGAffineTransformMakeRotation(GLKMathDegreesToRadians(90));
+    
+    // Set up the position of the HUD labels based on the device being used e.g. iPhone or iPad.
+    // ***** These labels are currently set to hidden in the storyboards
+    CGRect shieldLabelFrame = shieldText.frame;
+    CGRect scoreLabelFrame = scoreText.frame;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        NSLog(@"Setting up labels for iPad");
+        shieldLabelFrame.origin = CGPointMake(620, 115);
+        scoreLabelFrame.origin = CGPointMake(620, 890);
+    } else {
+        NSLog(@"Setting up labels for iPhone");
+        shieldLabelFrame.origin = CGPointMake(240, 60);
+        scoreLabelFrame.origin = CGPointMake(240, 420);
     }
     
-    light = [[Light alloc] initWithScene:self];
-    light.shader = self.effect;
-    light.position = GLKVector3Make(-5, 0, -10);
+    shieldText.frame = shieldLabelFrame;
+    [shieldText setTransform:HUDTextRotate];
+    [shieldText setText:@"Shield: 100%"];
+    
+    scoreText.frame = scoreLabelFrame;
+    [scoreText setTransform:HUDTextRotate];
+    [scoreText setText:@"Score: 000000"];
+    
+    // Set up the arrays which will hold the plasma and explosion particles
+    plasmaParticles = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 20; i++) {
+        SSAbstractObject *plasmaEmitter = [[PlasmaShot alloc] initWithScene:self usingShader:particleEmitterEffect];
+        [plasmaParticles addObject:plasmaEmitter];
+    }
+    
+    explosionParticles = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 5; i++) {
+        ParticleEmitter *explosion = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"explosionEmitter.pex" scene:self effectShader:self.particleEmitterEffect];
+        [explosionParticles addObject:explosion];
+    }
+        
+    // Init the dictionary that will hold our ship instances and create some
+    objects = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 10; i++) {
+        // Create a fighter ship
+        EnemyFighter *shipModel = [[EnemyFighter alloc] initWithScene:self];
+        shipModel.shader = self.effect;
+        [shipModel addToCollisionWorld:collisionWorld];
+        [objects addObject:shipModel];
+        
+        // Create a bomber ship
+        EnemyBomber *bomberModel = [[EnemyBomber alloc] initWithScene:self];
+        bomberModel.shader = self.effect;
+        [bomberModel addToCollisionWorld:collisionWorld];
+        [objects addObject:bomberModel];
+    }
+    
+    // Set up a particle emitter that we will use to generate sparks on the hull of ships as they are hit by bullets
+    sparksEmitter = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"sparksEmitter.pex" scene:self effectShader:particleEmitterEffect];
+    sparksEmitter.active = YES;
+    
+    // By default the player is not firing
+    firing = NO;
+    
+    thrusterOn = NO;
+    
 }
 
-- (void)initCoreMotion
-{
+- (void)initCoreMotion {
     NSLog(@"Initializing CoreMotion...");
     
     // By default coremotion is not enabled
@@ -213,27 +671,31 @@
     
     // Creation a CMMotionManager instance
     motionManager = [[CMMotionManager alloc] init];
+    referenceAttitude = nil;
     
     // Make sure the data we need is available
     if (!motionManager.deviceMotionAvailable) {
         NSLog(@"CoreMotion Not Available");
         return;
     }
-
-    // Set up the desired update interval
+    
+    // Set up the desired update interval e.g. 60 per second
     motionManager.deviceMotionUpdateInterval = 1.0f / 60;
     motionManager.gyroUpdateInterval = 1.0f / 60;
     
     // Start updates
     [motionManager startDeviceMotionUpdates];
+    
+    // Grab the reference attitude of the device
+    referenceAttitude = motionManager.deviceMotion.attitude;
+    
     [motionManager startGyroUpdates];
     coreMotionEnabled = YES;
     
 }
 
-- (void)initPhysics
-{
-
+- (void)initPhysics {
+    
     NSLog(@"Initializing Bullet Physics...");
     
     // Configure the bullet collision world parameters. This includes setting up the default collision
@@ -241,111 +703,20 @@
     // as the world in which colliions will be taking place
     btDefaultCollisionConfiguration *collisionConfiguration = new btDefaultCollisionConfiguration();
     btCollisionDispatcher *collisionDispatcher = new btCollisionDispatcher(collisionConfiguration);
-    btVector3 worldAabbMin(-500, -500, -500);
-    btVector3 worldAabbMax(500, 500, 500);
+    btVector3 worldAabbMin(-camera.farDistance, -camera.farDistance, -camera.farDistance);
+    btVector3 worldAabbMax(camera.farDistance, camera.farDistance, camera.farDistance);
     
     // Configure the broadphase to be used in the collision world. This will detect collisions of objects
-    // AABB
+    // AABB. btAxisSweep3 is a good fast broadphase to use
     btAxisSweep3 *broadphase = new btAxisSweep3(worldAabbMin, worldAabbMax);
     
     collisionWorld = new btCollisionWorld(collisionDispatcher, broadphase, collisionConfiguration);
     
-    debugDrawer.setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+    // Configure debug drawing so that we can render bullet objects while debugging
+    debugDrawer.setDebugMode(btIDebugDraw::DBG_DrawWireframe  |  btIDebugDraw::DBG_DrawAabb);
     debugDrawer.setShader(bulletDebugEffect);
     collisionWorld->setDebugDrawer(&debugDrawer);
-}
 
-#pragma mark - GLKView and GLKViewController delegate methods
-
-- (void)update
-{
-
-    // Check for any collisions. This initial check will identify AABB collisions between objects. This
-    // is then followed up by a more detailed OBB collision check
-    int numManifolds = collisionWorld->getDispatcher()->getNumManifolds();
-    for (int i=0; i < numManifolds; i++)
-    {
-        // Get the manifold information and extract the two objects that have collided
-        btPersistentManifold *contactManifold =  collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
-		btCollisionObject *colObjA = static_cast<btCollisionObject*>(contactManifold->getBody0());
-		btCollisionObject *colObjB = static_cast<btCollisionObject*>(contactManifold->getBody1());
-        
-        // Having detected a collision between the objects OBB, now check to see if there are any actual contacts
-        // between the two objects. Only if there are and the distance is <= 0 should a collision be reported.
-        int numContacts = contactManifold->getNumContacts();
-        for (int j=0;j<numContacts;j++)
-        {
-            btManifoldPoint& pt = contactManifold->getContactPoint(j);
-            if (pt.getDistance()<=0.f)
-            {
-                NSLog(@"bang");
-                // Pass each object the object with which it has collided
-//                SSAbstractObject *objectA = (__bridge_transfer SSAbstractObject*)colObjA->getUserPointer();
-//                SSAbstractObject *objectB = (__bridge_transfer SSAbstractObject*)colObjB->getUserPointer();
-//                [objectA collidedWithObject:objectB];
-//                [objectB collidedWithObject:objectA];
-            }
-        }
-    }
-
-    
-    // Reset the scenes matrix
-    sceneModelMatrix = GLKMatrix4Identity;
-    
-    // Grab the current attitude from core motion and get it's matrix
-    attitude = motionManager.deviceMotion.attitude;
-    CMRotationMatrix rm = attitude.rotationMatrix;
-
-    // Transpose the matrix while loading it into a GLK compatible structure
-    GLKMatrix4 deviceMatrix = GLKMatrix4MakeAndTranspose(rm.m11, rm.m12, rm.m13, 0, 
-                                                         rm.m21, rm.m22, rm.m23, 0, 
-                                                         rm.m31, rm.m32, rm.m33, 
-                                                         0, 0, 0, 0, 1);
-    
-    // Apply rotation to the X and Y axis so that movement of the device is oriented with the OGL world
-    deviceMatrix = GLKMatrix4RotateX(deviceMatrix, GLKMathDegreesToRadians(90));
-    deviceMatrix = GLKMatrix4RotateY(deviceMatrix, GLKMathDegreesToRadians(-90));
-    
-    // Multiply our scene and device matrices together. This will cause all objects to then be rendered 
-    // based on the rotation of the device giving the appearance that we are looking around inside our
-    // 3D world
-    sceneModelMatrix = GLKMatrix4Multiply(sceneModelMatrix, deviceMatrix);
-    
-    // Update each fighter in the game
-    for (EnemyFighter *fighter in ships) {
-        [fighter updateWithDelta:self.timeSinceLastUpdate];
-    }
-    
-    [light updateWithDelta:self.timeSinceLastUpdate];
-    
-    // Update the collision world
-    collisionWorld->performDiscreteCollisionDetection();
-
-}
-
-- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    skyBoxEffect.transform.modelviewMatrix = sceneModelMatrix;
-    [skyBoxEffect prepareToDraw];
-    [skyBoxEffect draw];
-    
-    // Ask all the ships in the ships array to render
-    [ships makeObjectsPerformSelector:@selector(render)];
-    
-//    [light render];
-    
-    glPushGroupMarkerEXT(0, "Bullet Debug");
-    bulletDebugEffect.transform.modelviewMatrix = sceneModelMatrix;
-//    collisionWorld->debugDrawWorld();
-    glPopGroupMarkerEXT();
-    
-    // We don't need the current contents of the depth buffer in the next frame as we are clearing it
-    // so discarding it can provide a small but simple performance boost
-    const GLenum discards[]  = {GL_DEPTH_ATTACHMENT};
-    glDiscardFramebufferEXT(GL_FRAMEBUFFER, 1, discards);
-    
 }
 
 @end

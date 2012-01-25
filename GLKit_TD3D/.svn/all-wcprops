@@ -1,0 +1,299 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/games/!svn/ver/24/trunk/GLKit_TD3D/GLKit_TD3D
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/main.m
+END
+particleStar.png
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/games/!svn/ver/14/trunk/GLKit_TD3D/GLKit_TD3D/particleStar.png
+END
+TBXML.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/TBXML.m
+END
+ParticleEmitter.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/ParticleEmitter.h
+END
+SSTD3DAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/SSTD3DAppDelegate.h
+END
+SSAbstractObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/SSAbstractObject.h
+END
+SSGameSceneController.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/SSGameSceneController.h
+END
+EnemyBomber.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/EnemyBomber.h
+END
+EnemyFighterTexture.png
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/EnemyFighterTexture.png
+END
+SSTD3DAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/SSTD3DAppDelegate.m
+END
+SSModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/SSModel.h
+END
+GLKit_TD3D-Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/GLKit_TD3D-Prefix.pch
+END
+EnemyFighterModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/games/!svn/ver/22/trunk/GLKit_TD3D/GLKit_TD3D/EnemyFighterModel.h
+END
+TBXMLParticleAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/TBXMLParticleAdditions.h
+END
+Camera.mm
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/games/!svn/ver/22/trunk/GLKit_TD3D/GLKit_TD3D/Camera.mm
+END
+PlasmaShot.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/PlasmaShot.h
+END
+TBXMLParticleAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/TBXMLParticleAdditions.m
+END
+ParticleEmitter.mm
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/ParticleEmitter.mm
+END
+SkyBox.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/SkyBox.h
+END
+EnemyBomberTexture.png
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/games/!svn/ver/12/trunk/GLKit_TD3D/GLKit_TD3D/EnemyBomberTexture.png
+END
+SSGameSceneController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/SSGameSceneController.mm
+END
+SkyBox.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/SkyBox.m
+END
+EnemyBomberModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/games/!svn/ver/12/trunk/GLKit_TD3D/GLKit_TD3D/EnemyBomberModel.h
+END
+Camera.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/Camera.h
+END
+SSMenuSceneController.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/SSMenuSceneController.h
+END
+AssetManager.mm
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/games/!svn/ver/22/trunk/GLKit_TD3D/GLKit_TD3D/AssetManager.mm
+END
+skybox_texture.png
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/skybox_texture.png
+END
+OpenGLCommon.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/games/!svn/ver/24/trunk/GLKit_TD3D/GLKit_TD3D/OpenGLCommon.h
+END
+PlasmaShot.mm
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/PlasmaShot.mm
+END
+PlasmaModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/games/!svn/ver/11/trunk/GLKit_TD3D/GLKit_TD3D/PlasmaModel.h
+END
+SSMenuSceneController.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/SSMenuSceneController.m
+END
+sparksEmitter.pex
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/games/!svn/ver/18/trunk/GLKit_TD3D/GLKit_TD3D/sparksEmitter.pex
+END
+defaultParticle.png
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/games/!svn/ver/14/trunk/GLKit_TD3D/GLKit_TD3D/defaultParticle.png
+END
+redsight.png
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/redsight.png
+END
+EnemyFighter.mm
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/EnemyFighter.mm
+END
+NSDataAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/games/!svn/ver/11/trunk/GLKit_TD3D/GLKit_TD3D/NSDataAdditions.h
+END
+AssetManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/AssetManager.h
+END
+Constants.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/games/!svn/ver/11/trunk/GLKit_TD3D/GLKit_TD3D/Constants.h
+END
+plasmaEmitter.pex
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/games/!svn/ver/20/trunk/GLKit_TD3D/GLKit_TD3D/plasmaEmitter.pex
+END
+whitesight.png
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/whitesight.png
+END
+smokeEmitter.pex
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/games/!svn/ver/14/trunk/GLKit_TD3D/GLKit_TD3D/smokeEmitter.pex
+END
+NSDataAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/games/!svn/ver/11/trunk/GLKit_TD3D/GLKit_TD3D/NSDataAdditions.m
+END
+explosionEmitter.pex
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/games/!svn/ver/19/trunk/GLKit_TD3D/GLKit_TD3D/explosionEmitter.pex
+END
+SSAbstractObject.mm
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/SSAbstractObject.mm
+END
+GLKit_TD3D-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/games/!svn/ver/22/trunk/GLKit_TD3D/GLKit_TD3D/GLKit_TD3D-Info.plist
+END
+EnemyBomber.mm
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/EnemyBomber.mm
+END
+EnemyFighter.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/games/!svn/ver/25/trunk/GLKit_TD3D/GLKit_TD3D/EnemyFighter.h
+END
+TBXML.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/games/!svn/ver/11/trunk/GLKit_TD3D/GLKit_TD3D/TBXML.h
+END
+SSModel.mm
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/games/!svn/ver/22/trunk/GLKit_TD3D/GLKit_TD3D/SSModel.mm
+END

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="kGK-yH-0E1">
+    <dependencies>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="q8O-iG-IlK">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jmf-au-bSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="kGK-yH-0E1" customClass="SSMenuSceneController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jUf-Aq-05X">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Default-Landscape~ipad.png" id="l68-5t-upc">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dUc-UF-xPv">
+                                <rect key="frame" x="366" y="543" width="293" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Start Game">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2" kind="modal" modalTransitionStyle="crossDissolve" id="xDO-E3-l3r"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-2960" y="88"/>
+        </scene>
+        <scene sceneID="4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
+                <viewController id="2" customClass="SSGameSceneController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5" customClass="GLKView">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shield: 100%" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="QOg-3p-uFT">
+                                <rect key="frame" x="6" y="7" width="250" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="32"/>
+                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <size key="shadowOffset" width="2" height="2"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score:000000" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="M7J-CS-21c">
+                                <rect key="frame" x="774" y="7" width="250" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="32"/>
+                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <size key="shadowOffset" width="2" height="2"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="redsight.png" id="jlW-Ru-r7X">
+                                <rect key="frame" x="367" y="494" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="whitesight.png" id="l2m-65-7Ta">
+                                <rect key="frame" x="367" y="494" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="100%" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="uNr-ja-WQe">
+                                <rect key="frame" x="363" y="537" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="enemyShieldText" destination="uNr-ja-WQe" id="rIV-UW-kkH"/>
+                        <outlet property="redSight" destination="jlW-Ru-r7X" id="hKC-kT-AU3"/>
+                        <outlet property="scoreText" destination="M7J-CS-21c" id="3pi-TF-meZ"/>
+                        <outlet property="shieldText" destination="QOg-3p-uFT" id="Dd9-Wh-2d9"/>
+                        <outlet property="whiteSight" destination="l2m-65-7Ta" id="Lgh-FK-42g"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-1625" y="88"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Default-Landscape~ipad.png" width="1024" height="768"/>
+        <image name="redsight.png" width="38" height="38"/>
+        <image name="whitesight.png" width="38" height="38"/>
+    </resources>
+    <classes>
+        <class className="SSGameSceneController" superclassName="GLKViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SSGameSceneController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="enemyShieldText" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="redSight" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scoreText" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="shieldText" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="whiteSight" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="SSMenuSceneController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SSMenuSceneController.h"/>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <nil key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

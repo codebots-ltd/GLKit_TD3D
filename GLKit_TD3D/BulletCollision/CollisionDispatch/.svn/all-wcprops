@@ -1,0 +1,293 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch
+END
+btConvex2dConvex2dAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.cpp
+END
+btGhostObject.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btGhostObject.cpp
+END
+btCompoundCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h
+END
+btSimulationIslandManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSimulationIslandManager.h
+END
+SphereTriangleDetector.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/SphereTriangleDetector.cpp
+END
+btSphereSphereCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.cpp
+END
+btActivatingCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h
+END
+btConvexConcaveCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.cpp
+END
+btEmptyCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h
+END
+btCollisionObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionObject.h
+END
+btSphereBoxCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h
+END
+btDefaultCollisionConfiguration.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.cpp
+END
+btBoxBoxCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h
+END
+btInternalEdgeUtility.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/games/!svn/ver/13/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h
+END
+btConvexConvexAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.cpp
+END
+btManifoldResult.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btManifoldResult.h
+END
+btUnionFind.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btUnionFind.h
+END
+btSphereTriangleCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.cpp
+END
+btBox2dBox2dCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.cpp
+END
+btBoxBoxDetector.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btBoxBoxDetector.h
+END
+btCollisionCreateFunc.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h
+END
+btCollisionDispatcher.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionDispatcher.cpp
+END
+btCompoundCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.cpp
+END
+btCollisionWorld.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionWorld.h
+END
+btConvexPlaneCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h
+END
+btSimulationIslandManager.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSimulationIslandManager.cpp
+END
+btActivatingCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.cpp
+END
+btConvex2dConvex2dAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.h
+END
+btGhostObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btGhostObject.h
+END
+btEmptyCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.cpp
+END
+btCollisionObject.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionObject.cpp
+END
+btSphereBoxCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.cpp
+END
+btBoxBoxCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.cpp
+END
+SphereTriangleDetector.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/SphereTriangleDetector.h
+END
+btInternalEdgeUtility.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btInternalEdgeUtility.cpp
+END
+btSphereSphereCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h
+END
+btCollisionConfiguration.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionConfiguration.h
+END
+btManifoldResult.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btManifoldResult.cpp
+END
+btConvexConcaveCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.h
+END
+btUnionFind.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btUnionFind.cpp
+END
+btBoxBoxDetector.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btBoxBoxDetector.cpp
+END
+btDefaultCollisionConfiguration.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h
+END
+btConvexConvexAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h
+END
+btCollisionWorld.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionWorld.cpp
+END
+btSphereTriangleCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h
+END
+btConvexPlaneCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.cpp
+END
+btBox2dBox2dCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.h
+END
+btCollisionDispatcher.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/BulletCollision/CollisionDispatch/btCollisionDispatcher.h
+END

@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath
+END
+btQuickprof.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btQuickprof.h
+END
+btAlignedAllocator.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btAlignedAllocator.h
+END
+btSerializer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btSerializer.cpp
+END
+btAabbUtil2.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btAabbUtil2.h
+END
+btScalar.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btScalar.h
+END
+btConvexHullComputer.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btConvexHullComputer.h
+END
+btMotionState.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btMotionState.h
+END
+btSerializer.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btSerializer.h
+END
+btTransformUtil.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btTransformUtil.h
+END
+btPoolAllocator.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btPoolAllocator.h
+END
+btList.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btList.h
+END
+btDefaultMotionState.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btDefaultMotionState.h
+END
+btTransform.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btTransform.h
+END
+btIDebugDraw.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btIDebugDraw.h
+END
+btRandom.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btRandom.h
+END
+btStackAlloc.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btStackAlloc.h
+END
+btHashMap.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btHashMap.h
+END
+btConvexHull.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btConvexHull.cpp
+END
+btGeometryUtil.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btGeometryUtil.cpp
+END
+btQuaternion.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btQuaternion.h
+END
+btVector3.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btVector3.h
+END
+btQuadWord.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btQuadWord.h
+END
+btConvexHull.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btConvexHull.h
+END
+btMinMax.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btMinMax.h
+END
+btGeometryUtil.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btGeometryUtil.h
+END
+btAlignedObjectArray.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btAlignedObjectArray.h
+END
+btQuickprof.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btQuickprof.cpp
+END
+btAlignedAllocator.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btAlignedAllocator.cpp
+END
+btConvexHullComputer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btConvexHullComputer.cpp
+END
+btMatrix3x3.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/6/trunk/GLKit_TD3D/GLKit_TD3D/LinearMath/btMatrix3x3.h
+END

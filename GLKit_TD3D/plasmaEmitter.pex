@@ -1,0 +1,30 @@
+<particleEmitterConfig>
+	<texture>defaultParticle.png</texture>
+    <emissionRate>0.5</emissionRate>
+	<sourcePosition x="0" y="0" z="0"></sourcePosition>
+	<sourcePositionVariance x="0" y="0" z="0"></sourcePositionVariance>
+	<speed value="1"></speed>
+	<speedVariance value="0.2"></speedVariance>
+	<particleLifeSpan value="0.75"></particleLifeSpan>
+	<particleLifespanVariance value="0.25"></particleLifespanVariance>
+	<angle x="0" y="0"></angle>
+	<angleVariance x="360" y="360"></angleVariance>
+	<gravity x="0" y="0" z="0"></gravity>
+	<maxParticles value="75"></maxParticles>
+	<startParticleSize value="0.5"></startParticleSize>
+	<startParticleSizeVariance value="0.05"></startParticleSizeVariance>
+	<finishParticleSize value="0.05"></finishParticleSize>
+	<FinishParticleSizeVariance value="0.1"></FinishParticleSizeVariance>
+    
+    <startColor red="0.13" green="0.8" blue="0" alpha="1"></startColor>
+    <startColorVariance red="0" green="0" blue="0" alpha="0"></startColorVariance>
+    
+    <finishColor red="0" green="1" blue="0" alpha="0"></finishColor>
+    <finishColorVariance red="0" green="0" blue="0" alpha="0"></finishColorVariance>
+    
+    <rotationStart value="0"></rotationStart>
+    <rotationStartVariance value="0"></rotationStartVariance>
+    <rotationEnd value="0"></rotationEnd>
+    <rotationEndVariance value="0"></rotationEndVariance>
+	<duration value="-1"></duration>
+</particleEmitterConfig>

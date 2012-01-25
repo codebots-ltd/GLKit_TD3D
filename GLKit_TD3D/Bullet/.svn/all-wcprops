@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/games/!svn/ver/24/trunk/GLKit_TD3D/GLKit_TD3D/Bullet
+END
+GLDebugDrawer.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/games/!svn/ver/26/trunk/GLKit_TD3D/GLKit_TD3D/Bullet/GLDebugDrawer.h
+END
+GLDebugDrawer.mm
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/games/!svn/ver/26/trunk/GLKit_TD3D/GLKit_TD3D/Bullet/GLDebugDrawer.mm
+END
+btBulletCollisionCommon.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/games/!svn/ver/24/trunk/GLKit_TD3D/GLKit_TD3D/Bullet/btBulletCollisionCommon.h
+END
