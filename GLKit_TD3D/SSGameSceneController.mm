@@ -69,11 +69,7 @@
     uint                firingTouchHash;        // Tracks the touch that caused the player to fire
     
     uint                enemyShield;            // Holds the shiled of the currently target enemy
-    
-    BOOL                thrusterOn;             // YES if the thruster button is being pressed
-    float               speed;                  // The current speed of the player
 
-    GLKMatrix4          deviceMatrix;           // Holds the gyros roation matrix for the device
 }
 
 #pragma mark - Private Properties
@@ -182,8 +178,6 @@
     redSight = nil;
     enemyShieldText = nil;
     touchImage = nil;
-    thrustButton = nil;
-    speedLabel = nil;
     [super viewDidUnload];
 
 }
@@ -315,6 +309,7 @@
     CMRotationMatrix rm = attitude.rotationMatrix;
     
     // Create a GLKMatrix4 that we will apply to our models so that they are rendered in relation to where the device is pointing
+    GLKMatrix4 deviceMatrix;
     deviceMatrix = GLKMatrix4Make(rm.m11, rm.m21, rm.m31, 0, 
                                   rm.m12, rm.m22, rm.m32, 0,
                                   rm.m13, rm.m23, rm.m33, 0,
@@ -331,25 +326,12 @@
         sceneModelMatrix = GLKMatrix4Multiply(sceneModelMatrix, deviceMatrix);
     }
     
-    // While the thrust button is pressed increase speed to the max. If the button is not pressed then reduce
-    // speed
-    if (thrusterOn) {
-        if (speed + 0.001f <= 0.5f)
-            speed += 0.001f;
-    } else {
-        if (speed - 0.001f >= 0)
-            speed -= 0.001f;
-    }
-
-    // Adjust the cameras location
-    camera.position = GLKVector3Add(camera.position, GLKVector3MultiplyScalar(GLKVector3Negate(camera.facingVector), speed));
-    
     // Move to the cameras location
     sceneModelMatrix = GLKMatrix4Translate(sceneModelMatrix, camera.position.x, camera.position.y, camera.position.z);
-
+        
     // Update the camera based on the rotation of the device which is now held in the sceneModelMatrix
-    [camera updateWithModelMatrix:deviceMatrix];
-
+    [camera updateWithModelMatrix:sceneModelMatrix];
+    
     // Check to see if the gun sight is lined up
     enemyInSights = [self checkGunSight];
     
@@ -357,7 +339,7 @@
     // This ensures that the lights position is calculated correctly for all rendering from this point onwards on the scenes objects
     self.effect.transform.modelviewMatrix = sceneModelMatrix;
     self.effect.light0.position = GLKVector4Make(0, 0, 1, 0);
-    
+
     // Update the logic of each object in the scene. They all inherit from SSAbstractObject so we can treat each object as an 
     // SSAbstractObject
     for (SSAbstractObject *object in objects) {
@@ -398,9 +380,8 @@
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    // Transform and render the skybox. We pass in the deviceMatrix as we are only interested in rotation for the skybox
-    // as it's always located at the cameras position
-    [skybox renderWithModelMatrix:deviceMatrix gameScene:self];
+    // Transform and render the skybox
+    [skybox renderWithModelMatrix:sceneModelMatrix];
     
     // Render ships
     [objects makeObjectsPerformSelector:@selector(render)];
@@ -441,9 +422,6 @@
         whiteSight.hidden = NO;
         enemyShieldText.hidden = YES;
     }
-    
-    // Update the ships speed
-    [speedLabel setText:[NSString stringWithFormat:@"Speed: %1.2f", speed]];
 
 }
 
@@ -578,14 +556,6 @@
     }    
 }
 
-- (IBAction)thrusterFiring:(id)sender {
-    thrusterOn = YES;
-}
-
-- (IBAction)thrusterStopped:(id)sender {
-    thrusterOn = NO;
-}
-
 #pragma mark - Init Core Motion, Physics world and Game Scene
 
 #pragma mark - Initialize Scene
@@ -658,8 +628,6 @@
     
     // By default the player is not firing
     firing = NO;
-    
-    thrusterOn = NO;
     
 }
 

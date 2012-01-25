@@ -23,7 +23,7 @@
 		8F43E301145F1127004FBE6B /* plasmaEmitter.pex in Resources */ = {isa = PBXBuildFile; fileRef = 8F43E2FF145F1127004FBE6B /* plasmaEmitter.pex */; };
 		8F43E307145F1948004FBE6B /* PlasmaShot.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F43E306145F1948004FBE6B /* PlasmaShot.mm */; };
 		8F528ED61432151900F7EAF8 /* Camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F528ED51432151800F7EAF8 /* Camera.mm */; };
-		8F528EDA1432229400F7EAF8 /* SkyBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F528ED91432229300F7EAF8 /* SkyBox.mm */; };
+		8F528EDA1432229400F7EAF8 /* SkyBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F528ED91432229300F7EAF8 /* SkyBox.m */; };
 		8F531CF2141E643900118841 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F531CF1141E643900118841 /* UIKit.framework */; };
 		8F531CF4141E643900118841 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F531CF3141E643900118841 /* Foundation.framework */; };
 		8F531CF6141E643900118841 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F531CF5141E643900118841 /* CoreGraphics.framework */; };
@@ -165,7 +165,7 @@
 		8F528ED41432151800F7EAF8 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Camera.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8F528ED51432151800F7EAF8 /* Camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = Camera.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8F528ED81432229300F7EAF8 /* SkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SkyBox.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		8F528ED91432229300F7EAF8 /* SkyBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = SkyBox.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8F528ED91432229300F7EAF8 /* SkyBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SkyBox.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8F531CED141E643900118841 /* GLKit_TD3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLKit_TD3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F531CF1141E643900118841 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8F531CF3141E643900118841 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -471,7 +471,7 @@
 				8F43E305145F1948004FBE6B /* PlasmaShot.h */,
 				8F43E306145F1948004FBE6B /* PlasmaShot.mm */,
 				8F528ED81432229300F7EAF8 /* SkyBox.h */,
-				8F528ED91432229300F7EAF8 /* SkyBox.mm */,
+				8F528ED91432229300F7EAF8 /* SkyBox.m */,
 				8F528ED41432151800F7EAF8 /* Camera.h */,
 				8F528ED51432151800F7EAF8 /* Camera.mm */,
 			);
@@ -1006,7 +1006,7 @@
 				8F218D0514227FC40060C5AC /* EnemyFighter.mm in Sources */,
 				8FAFA3AA142F877A006913FD /* EnemyBomber.mm in Sources */,
 				8F528ED61432151900F7EAF8 /* Camera.mm in Sources */,
-				8F528EDA1432229400F7EAF8 /* SkyBox.mm in Sources */,
+				8F528EDA1432229400F7EAF8 /* SkyBox.m in Sources */,
 				8F079AD11445E9A100B1AF3A /* ParticleEmitter.mm in Sources */,
 				8F079AD91445EAE800B1AF3A /* NSDataAdditions.m in Sources */,
 				8F079ADA1445EAE800B1AF3A /* TBXML.m in Sources */,

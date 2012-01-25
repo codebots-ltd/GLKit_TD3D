@@ -72,7 +72,7 @@
         viewHeight = gameSceneController.view.bounds.size.height;
         aspectRatio = viewWidth/viewHeight;
         nearDistance = 0.1f;
-        farDistance = 1000.0f;
+        farDistance = 500.0f;
         
         // Create a 4x4 projection matrix. This will be used by all shaders as their projection matrix
         projectionMatrix = GLKMatrix4MakePerspective(fieldOfView, aspectRatio, nearDistance, farDistance);
@@ -87,18 +87,9 @@
 
 - (void)updateWithModelMatrix:(GLKMatrix4)aModelMatrix {
     
-    GLKMatrix4 collisionMatrix = GLKMatrix4Identity;
-    collisionMatrix = GLKMatrix4Translate(collisionMatrix, gameSceneController.camera.position.x, gameSceneController.camera.position.y, gameSceneController.camera.position.z);
-    collisionMatrix = GLKMatrix4Multiply(aModelMatrix, collisionMatrix);
-    
-    // Update the objects collision hull orientation with the same matrix used for the model
-    basis.setFromOpenGLSubMatrix(collisionMatrix.m);
-    collisionObject->getWorldTransform().setBasis(basis);
-
     // Update the facing vector based on the rotation matrix
-    aModelMatrix = GLKMatrix4Invert(collisionMatrix, nil);
-    facingVector = GLKVector3Normalize(GLKMatrix4MultiplyVector3(collisionMatrix, facingIdentityVector));
-    
+    aModelMatrix =  GLKMatrix4Invert(aModelMatrix, nil);
+    facingVector = GLKVector3Normalize(GLKMatrix4MultiplyVector3(aModelMatrix, facingIdentityVector));
     
 }
 

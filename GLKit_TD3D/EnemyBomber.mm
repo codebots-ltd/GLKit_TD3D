@@ -95,7 +95,6 @@
             // Decide if you want to fire the weapon at the player
             if ((int)(10 * RANDOM_0_TO_1()) == 1) {
                 [gameSceneController fireWeaponFrom:position to:gameSceneController.camera.position];
-//                NSLog(@"%f %f %f", gameSceneController.camera.position.x, gameSceneController.camera.position.y, gameSceneController.camera.position.z);
             }
             
             // Steer the model to the next waypoint

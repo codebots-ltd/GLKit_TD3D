@@ -46,22 +46,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
                 <viewController id="2" customClass="SSGameSceneController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5" customClass="GLKView">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shield: 100%" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="QOg-3p-uFT">
-                                <rect key="frame" x="6" y="115" width="250" height="36"/>
+                                <rect key="frame" x="6" y="7" width="250" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="32"/>
-                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <size key="shadowOffset" width="2" height="2"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Speed:" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="b8R-Gm-ulD">
-                                <rect key="frame" x="6" y="0.0" width="250" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="28"/>
                                 <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -92,36 +83,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="touchImage.png" id="YHh-QQ-JXP">
-                                <rect key="frame" x="781" y="210" width="128" height="128"/>
+                                <rect key="frame" x="780" y="401" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qKh-fT-gQS">
-                                <rect key="frame" x="20" y="780" width="135" height="135"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="touchImage.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="thrusterFiring:" destination="2" eventType="touchDown" id="3Ku-QX-Yfl"/>
-                                    <action selector="thrusterStopped:" destination="2" eventType="touchUpInside" id="AyB-Te-y1E"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="enemyShieldText" destination="uNr-ja-WQe" id="rIV-UW-kkH"/>
                         <outlet property="redSight" destination="jlW-Ru-r7X" id="hKC-kT-AU3"/>
                         <outlet property="scoreText" destination="M7J-CS-21c" id="3pi-TF-meZ"/>
                         <outlet property="shieldText" destination="QOg-3p-uFT" id="Dd9-Wh-2d9"/>
-                        <outlet property="speedLabel" destination="b8R-Gm-ulD" id="aHc-Xc-8Xj"/>
-                        <outlet property="thrustButton" destination="qKh-fT-gQS" id="5pk-Y2-d7w"/>
                         <outlet property="touchImage" destination="YHh-QQ-JXP" id="eGl-54-gbh"/>
                         <outlet property="whiteSight" destination="l2m-65-7Ta" id="Lgh-FK-42g"/>
                     </connections>
@@ -136,26 +110,6 @@
         <image name="touchImage.png" width="128" height="128"/>
         <image name="whitesight.png" width="38" height="38"/>
     </resources>
-    <classes>
-        <class className="SSGameSceneController" superclassName="GLKViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SSGameSceneController.h"/>
-            <relationships>
-                <relationship kind="action" name="thrusterFiring:"/>
-                <relationship kind="action" name="thrusterStopped:"/>
-                <relationship kind="outlet" name="enemyShieldText" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="redSight" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scoreText" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="shieldText" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="speedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="thrustButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="touchImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="whiteSight" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="SSMenuSceneController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SSMenuSceneController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

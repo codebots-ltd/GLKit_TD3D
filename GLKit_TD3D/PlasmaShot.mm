@@ -72,7 +72,7 @@
 
         // Increment a timer. If the particle is alive for more than 5 seconds then destroy it
         timer += aDelta;
-        if (timer >= 5) {
+        if (timer == 5000) {
             timer = 0;
             particleEmitter.active = NO;
             [self removeFromCollisionWorld:gameSceneController.collisionWorld];

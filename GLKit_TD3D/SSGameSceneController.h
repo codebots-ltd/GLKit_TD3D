@@ -55,8 +55,6 @@
     IBOutlet UIImageView    *redSight;
     IBOutlet UILabel        *enemyShieldText;
     IBOutlet UIImageView    *touchImage;
-    IBOutlet UIButton       *thrustButton;
-    IBOutlet UILabel        *speedLabel;
     
     GLKBaseEffect       *particleEmitterEffect;
 
@@ -78,7 +76,5 @@
 // location and run
 - (void)explosionAt:(GLKVector3)aVector;
 
-- (IBAction)thrusterFiring:(id)sender;
-- (IBAction)thrusterStopped:(id)sender;
 
 @end

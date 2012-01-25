@@ -25,14 +25,12 @@
 //
 
 #import <GLKit/GLKit.h>
-#import "SSGameSceneController.h"
 
 @interface SkyBox : NSObject {
     GLfloat height;
     GLfloat width;
     GLfloat depth;
-    GLKMatrix4 projectionMatrix;
-    GLKVector3 center;
+    GLKMatrix4 projectionMatrix;    
 }
 
 #pragma mark - Properties
@@ -41,13 +39,12 @@
 @property (nonatomic, assign) GLfloat width;
 @property (nonatomic, assign) GLfloat depth;
 @property (nonatomic, assign) GLKMatrix4 projectionMatrix;
-@property (nonatomic, assign) GLKVector3 center;
 
 // Initializes the skybox effect with the specified height, width and depth along with the projection matrix to be
 // used
 - (id)initWithProjectionMatrix:(GLKMatrix4)aProjectionMatrix width:(GLfloat)aWidth height:(GLfloat)aHeight depth:(GLfloat)aDepth;
 
 // Renders the skybox
-- (void)renderWithModelMatrix:(GLKMatrix4)aModelMatrix gameScene:(SSGameSceneController*)gameScene;
+- (void)renderWithModelMatrix:(GLKMatrix4)aModelMatrix;
 
 @end
