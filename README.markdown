@@ -2,6 +2,8 @@
 
 GLKit_TD3D is a 3D prototype game tech demo that uses the new iOS 5 GLKit features and Arc. It's a space shooter in which the player is in a static location surrounded by enemy ships firing at the player. The player must physically move their iPhone or iPad up, down, and 360 degrees around to see the ships, track them and shoot at them. The code uses the gyroscope in the iPhone/iPad to work out where the player is looking within the 3D world.
 
+This is the project I created for a talk I did at the Voices That Matter iPhone developers conference in Boston November 2011.
+
 ### Features
 
 * Collision detection managed using the Bullet 3D physics engine
