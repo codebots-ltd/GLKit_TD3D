@@ -21,8 +21,6 @@ GLKit_TD3D is a 3D prototype game tech demo that uses the new iOS 5 GLKit featur
 Take a look, have a play and enjoy. If this inspires your and you create something based on this code then share it with us as we love to see what people are doing :o)
 
 <br/>
-<br/>
-
 ### MIT License
   Copyright 2012 71Squared All rights reserved.
   
