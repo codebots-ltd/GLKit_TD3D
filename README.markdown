@@ -7,8 +7,8 @@ GLKit_TD3D is a 3D prototype game tech demo that uses the new iOS 5 GLKit featur
 * Collision detection managed using the Bullet 3D physics engine
 * All rendering is performed using iOS 5 GLKit including skybox, texturing and Vertex Array Objects
 * Gyroscope based movement providing the players view into the 3D world
-* 3D particle system for explisions, sparks when enemy ships are hit and enemy shots at the player
-* Models developed in Blender and exported using Jeff Lamarche's blender exporter script [here](https://github.com/jlamarche/iOS-OpenGLES-Stuff/tree/master/Blender%20Export/objc_blend_2.57%20(RC1))
+* 3D particle system for explosions, sparks on enemy ships when hit and enemy shots at the player
+* Models developed in Blender and exported using Jeff Lamarche's blender exporter script [here](https://github.com/jlamarche/iOS-OpenGLES-Stuff)
 
 ### Design Goals
 
@@ -18,7 +18,7 @@ GLKit_TD3D is a 3D prototype game tech demo that uses the new iOS 5 GLKit featur
 
 ### What Now?
 
-Take a look, have a play and enjoy. If this inspires your and you create something based on this code then share it with us as we love to see what people are doing :o)
+Take a look, have a play and enjoy. If this inspires you and you create something based on this code then share it with us as we love to see what people are doing :o)
 
 <br/>
 ### MIT License
